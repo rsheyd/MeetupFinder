@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092AB06CA5A0EC492B94183A /* Pods_MeetupFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637E32EB7A3A8475D25EEB34 /* Pods_MeetupFinder.framework */; };
 		30C0BB021F1EEA05006D4531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0BB011F1EEA05006D4531 /* AppDelegate.swift */; };
 		30C0BB041F1EEA05006D4531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0BB031F1EEA05006D4531 /* ViewController.swift */; };
 		30C0BB071F1EEA05006D4531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C0BB051F1EEA05006D4531 /* Main.storyboard */; };
@@ -22,6 +23,9 @@
 		30C0BB081F1EEA05006D4531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C0BB0B1F1EEA05006D4531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30C0BB0D1F1EEA05006D4531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		637E32EB7A3A8475D25EEB34 /* Pods_MeetupFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetupFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E352F66233B521350BC6D9D /* Pods-MeetupFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		8A14908ECC1A3EB2AE4E1383 /* Pods-MeetupFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				092AB06CA5A0EC492B94183A /* Pods_MeetupFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25E3DF9A2B7E2F5E7A7E983C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E352F66233B521350BC6D9D /* Pods-MeetupFinder.debug.xcconfig */,
+				8A14908ECC1A3EB2AE4E1383 /* Pods-MeetupFinder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		30C0BAF51F1EEA05006D4531 = {
 			isa = PBXGroup;
 			children = (
 				30C0BB001F1EEA05006D4531 /* MeetupFinder */,
 				30C0BAFF1F1EEA05006D4531 /* Products */,
+				25E3DF9A2B7E2F5E7A7E983C /* Pods */,
+				58B83B24425AA3A1D5DFC3AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = MeetupFinder;
 			sourceTree = "<group>";
 		};
+		58B83B24425AA3A1D5DFC3AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				637E32EB7A3A8475D25EEB34 /* Pods_MeetupFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30C0BB101F1EEA05006D4531 /* Build configuration list for PBXNativeTarget "MeetupFinder" */;
 			buildPhases = (
+				01902AA0A2B86F17E3296D6A /* [CP] Check Pods Manifest.lock */,
 				30C0BAFA1F1EEA05006D4531 /* Sources */,
 				30C0BAFB1F1EEA05006D4531 /* Frameworks */,
 				30C0BAFC1F1EEA05006D4531 /* Resources */,
+				BA5888D5EC862690017220E9 /* [CP] Embed Pods Frameworks */,
+				84FC6057DEC64C6F720C4F15 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01902AA0A2B86F17E3296D6A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84FC6057DEC64C6F720C4F15 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA5888D5EC862690017220E9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30C0BAFA1F1EEA05006D4531 /* Sources */ = {
@@ -259,10 +334,12 @@
 		};
 		30C0BB111F1EEA05006D4531 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E352F66233B521350BC6D9D /* Pods-MeetupFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 59ZDL3D4PJ;
 				INFOPLIST_FILE = MeetupFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.rlabs.MeetupFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -272,10 +349,12 @@
 		};
 		30C0BB121F1EEA05006D4531 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A14908ECC1A3EB2AE4E1383 /* Pods-MeetupFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 59ZDL3D4PJ;
 				INFOPLIST_FILE = MeetupFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.rlabs.MeetupFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +381,7 @@
 				30C0BB121F1EEA05006D4531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
