@@ -29,16 +29,17 @@ class MeetupClient: NSObject {
     }
     
     func makeEvent(json: JSON) -> Event? {
-        if let groupName = json["group"]["name"].string,
-            let eventName = json["name"].string,
-            let eventDescription = json["description"].string,
+        if let id = json["id"].string,
+            let name = json["name"].string,
+            let description = json["description"].string,
+            let groupName = json["group"]["name"].string,
             let rsvpCount = json["yes_rsvp_count"].int,
             let rsvpLimit = json["rsvp_limit"].int,
             let lat = json["venue"]["lat"].double,
             let lon = json["venue"]["lon"].double,
             let time = json["time"].double,
             let link = json["link"].string {
-            return Event(groupName: groupName, eventName: eventName, eventDescription: eventDescription, rsvpCount: rsvpCount, rsvpLimit: rsvpLimit, lat: lat, lon: lon, time: time, link: link)
+            return Event(id: id, name: name, description: description, groupName: groupName,  rsvpCount: rsvpCount, rsvpLimit: rsvpLimit, lat: lat, lon: lon, time: time, link: link)
         } else {
             return nil
         }
@@ -52,13 +53,16 @@ class MeetupClient: NSObject {
             
             if let jsonRaw = response.result.value,
                 let eventJsonArray = JSON(jsonRaw).array {
+                    self.allEvents.removeAll()
+                    self.openEvents.removeAll()
+                
                     for eventJson in eventJsonArray {
                         if let event = self.makeEvent(json: eventJson) {
                             self.allEvents.append(event)
                             if event.rsvpLimit != event.rsvpCount {
                                 self.openEvents.append(event)
                             }
-                            print(event.eventName)
+                            print(event.name)
                         }
                     }
             }

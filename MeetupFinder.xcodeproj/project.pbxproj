@@ -19,6 +19,8 @@
 		30C0BB071F1EEA05006D4531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C0BB051F1EEA05006D4531 /* Main.storyboard */; };
 		30C0BB091F1EEA05006D4531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C0BB081F1EEA05006D4531 /* Assets.xcassets */; };
 		30C0BB0C1F1EEA05006D4531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C0BB0A1F1EEA05006D4531 /* LaunchScreen.storyboard */; };
+		30E74E131F46A42D00C46326 /* EventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E74E121F46A42D00C46326 /* EventDetails.swift */; };
+		30E74E151F475FFA00C46326 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E74E141F475FFA00C46326 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		30C0BB081F1EEA05006D4531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C0BB0B1F1EEA05006D4531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30C0BB0D1F1EEA05006D4531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30E74E121F46A42D00C46326 /* EventDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetails.swift; sourceTree = "<group>"; };
+		30E74E141F475FFA00C46326 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		637E32EB7A3A8475D25EEB34 /* Pods_MeetupFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetupFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E352F66233B521350BC6D9D /* Pods-MeetupFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		8A14908ECC1A3EB2AE4E1383 /* Pods-MeetupFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,7 +68,9 @@
 		302F22ED1F1EEC6500D1339F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				302F22F31F1EED4600D1339F /* Constants.swift */,
 				30C0BB081F1EEA05006D4531 /* Assets.xcassets */,
+				30E74E141F475FFA00C46326 /* GoogleService-Info.plist */,
 				30C0BB0A1F1EEA05006D4531 /* LaunchScreen.storyboard */,
 				30C0BB0D1F1EEA05006D4531 /* Info.plist */,
 			);
@@ -76,6 +82,7 @@
 			children = (
 				30C0BB031F1EEA05006D4531 /* EventList.swift */,
 				301C18351F243AD4005A6B34 /* Menu.swift */,
+				30E74E121F46A42D00C46326 /* EventDetails.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -94,7 +101,6 @@
 			children = (
 				301C182F1F22A11E005A6B34 /* Helper.swift */,
 				302F22F11F1EECFA00D1339F /* MeetupClient.swift */,
-				302F22F31F1EED4600D1339F /* Constants.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C0BB0C1F1EEA05006D4531 /* LaunchScreen.storyboard in Resources */,
+				30E74E151F475FFA00C46326 /* GoogleService-Info.plist in Resources */,
 				30C0BB091F1EEA05006D4531 /* Assets.xcassets in Resources */,
 				30C0BB071F1EEA05006D4531 /* Main.storyboard in Resources */,
 			);
@@ -216,13 +223,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MeetupFinder-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		84FC6057DEC64C6F720C4F15 /* [CP] Copy Pods Resources */ = {
@@ -246,9 +256,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -263,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C0BB041F1EEA05006D4531 /* EventList.swift in Sources */,
+				30E74E131F46A42D00C46326 /* EventDetails.swift in Sources */,
 				301C18341F22FDFD005A6B34 /* MeetupStore.swift in Sources */,
 				301C18361F243AD4005A6B34 /* Menu.swift in Sources */,
 				30C0BB021F1EEA05006D4531 /* AppDelegate.swift in Sources */,
