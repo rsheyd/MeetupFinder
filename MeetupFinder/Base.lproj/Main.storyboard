@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Events-->
+        <!--Event List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Events" id="BYZ-38-t0r" customClass="EventList" customModule="MeetupFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Event List" id="BYZ-38-t0r" customClass="EventList" customModule="MeetupFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gxx-zH-tKW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -49,37 +49,18 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ghC-bi-Wqs"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nb9-Eu-r2Z">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" id="M4l-9H-dm8">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2dz-B8-yaz">
-                                            <rect key="frame" x="16" y="7" width="101" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Open Meetups"/>
-                                            <connections>
-                                                <action selector="openMeetupsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S0r-6v-YfB"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Dug-AN-MPA"/>
-                                    <barButtonItem style="plain" id="Tp1-tT-gzH">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g1e-S1-ReG">
-                                            <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="All Meetups"/>
-                                            <connections>
-                                                <action selector="allMeetupsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P02-pk-QG7"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-Na-tZD">
+                                <rect key="frame" x="312" y="72" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="openMeetupsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZXb-LC-fVF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Event List" id="ppO-1m-TzK"/>
+                    <tabBarItem key="tabBarItem" title="Event List" image="list50" id="w01-kT-exz"/>
                     <connections>
                         <outlet property="tableView" destination="Gxx-zH-tKW" id="ww5-JC-bpZ"/>
                         <segue destination="dls-9J-dHn" kind="show" identifier="toEventDetails" id="XHa-pS-NgK"/>
@@ -87,7 +68,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="99.400299850074973"/>
+            <point key="canvasLocation" x="2015.2" y="99.400299850074973"/>
+        </scene>
+        <!--New Event-->
+        <scene sceneID="c1G-Ox-vcc">
+            <objects>
+                <tableViewController id="LUK-mX-gAj" customClass="NewEvent" customModule="MeetupFinder" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="net-94-GLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2274" y="-676"/>
         </scene>
         <!--Event Details-->
         <scene sceneID="7DY-Zb-zrK">
@@ -117,7 +106,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hho-fb-RRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1965.5999999999999" y="98.50074962518741"/>
+            <point key="canvasLocation" x="2904.8000000000002" y="98.50074962518741"/>
+        </scene>
+        <!--Map View-->
+        <scene sceneID="JC2-eE-iyM">
+            <objects>
+                <viewController title="Map View" id="xTN-2T-JCs" customClass="MapView" customModule="MeetupFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nT2-Rt-UTd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fl8-rS-GFO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yA8-Ea-sXH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RBT-do-RbH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-h5-rHE">
+                                <rect key="frame" x="306" y="72" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshBtnPressed:" destination="xTN-2T-JCs" eventType="touchUpInside" id="VPh-jT-rwT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map View" image="map50" id="AJ2-FJ-joO"/>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="mapView" destination="RBT-do-RbH" id="8wk-LC-TBu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Erv-fi-UIk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015" y="844"/>
         </scene>
         <!--Main Nav-->
         <scene sceneID="gR7-Gq-PNk">
@@ -130,12 +156,36 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ddV-sp-5lR"/>
+                        <segue destination="se2-0Y-SNr" kind="relationship" relationship="rootViewController" id="ddV-sp-5lR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJf-QF-w2K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="99.400299850074973"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="mHC-M8-tke">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="se2-0Y-SNr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="JHz-Jx-hx6"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="iXD-aG-hmO">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="QSh-zh-Icr"/>
+                        <segue destination="xTN-2T-JCs" kind="relationship" relationship="viewControllers" id="tH8-F6-QhT"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vrY-IU-hPq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="99.400299850074973"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="list50" width="25" height="25"/>
+        <image name="map50" width="25" height="25"/>
+    </resources>
 </document>

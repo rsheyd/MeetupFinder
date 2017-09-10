@@ -5,6 +5,7 @@ inhibit_all_warnings!
 target 'MeetupFinder' do
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'Eureka'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
 end

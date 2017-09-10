@@ -25,14 +25,14 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func openMeetupsPressed(_ sender: Any) {
-        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), lon: String(currentLocation.coordinate.longitude)) {
+        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), long: String(currentLocation.coordinate.longitude)) {
             self.events = MeetupClient.shared.openEvents
             self.tableView.reloadData()
         }
     }
     
     @IBAction func allMeetupsPressed(_ sender: Any) {
-        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), lon: String(currentLocation.coordinate.longitude)) {
+        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), long: String(currentLocation.coordinate.longitude)) {
             self.events = MeetupClient.shared.allEvents
             self.tableView.reloadData()
         }
@@ -58,6 +58,11 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.title = "Event List"
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let loc = manager.location {
             if currentLocation.coordinate.latitude == 0 {
@@ -65,7 +70,9 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
                 currentLocation = loc
                 openMeetupsPressed(self)
             } else {
+                //print(loc)
                 currentLocation = loc
+                MeetupClient.shared.currentLocation = loc
             }
         }
     }

@@ -14,6 +14,13 @@
 		301C18361F243AD4005A6B34 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301C18351F243AD4005A6B34 /* Menu.swift */; };
 		302F22F21F1EECFA00D1339F /* MeetupClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F22F11F1EECFA00D1339F /* MeetupClient.swift */; };
 		302F22F41F1EED4600D1339F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F22F31F1EED4600D1339F /* Constants.swift */; };
+		303A10CB1F63327B00AE3EB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A10CA1F63327B00AE3EB3 /* MapView.swift */; };
+		303A10CD1F63393400AE3EB3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 303A10CC1F63393400AE3EB3 /* MapKit.framework */; };
+		303A10D01F64446200AE3EB3 /* EventAnno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A10CF1F64446200AE3EB3 /* EventAnno.swift */; };
+		303A10D21F64482C00AE3EB3 /* EventPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A10D11F64482C00AE3EB3 /* EventPin.swift */; };
+		305EDBBB1F50F17300B96079 /* MeetupToFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305EDBBA1F50F17300B96079 /* MeetupToFirebase.swift */; };
+		305EDBBD1F50FFF000B96079 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305EDBBC1F50FFF000B96079 /* FirebaseClient.swift */; };
+		305EDBBF1F5101D800B96079 /* NewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305EDBBE1F5101D800B96079 /* NewEvent.swift */; };
 		30C0BB021F1EEA05006D4531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0BB011F1EEA05006D4531 /* AppDelegate.swift */; };
 		30C0BB041F1EEA05006D4531 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0BB031F1EEA05006D4531 /* EventList.swift */; };
 		30C0BB071F1EEA05006D4531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C0BB051F1EEA05006D4531 /* Main.storyboard */; };
@@ -30,6 +37,13 @@
 		301C18351F243AD4005A6B34 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		302F22F11F1EECFA00D1339F /* MeetupClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupClient.swift; sourceTree = "<group>"; };
 		302F22F31F1EED4600D1339F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		303A10CA1F63327B00AE3EB3 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		303A10CC1F63393400AE3EB3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		303A10CF1F64446200AE3EB3 /* EventAnno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnno.swift; sourceTree = "<group>"; };
+		303A10D11F64482C00AE3EB3 /* EventPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPin.swift; sourceTree = "<group>"; };
+		305EDBBA1F50F17300B96079 /* MeetupToFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupToFirebase.swift; sourceTree = "<group>"; };
+		305EDBBC1F50FFF000B96079 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
+		305EDBBE1F5101D800B96079 /* NewEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEvent.swift; sourceTree = "<group>"; };
 		30C0BAFE1F1EEA05006D4531 /* MeetupFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetupFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C0BB011F1EEA05006D4531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C0BB031F1EEA05006D4531 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
@@ -49,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303A10CD1F63393400AE3EB3 /* MapKit.framework in Frameworks */,
 				092AB06CA5A0EC492B94183A /* Pods_MeetupFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +98,8 @@
 				30C0BB031F1EEA05006D4531 /* EventList.swift */,
 				301C18351F243AD4005A6B34 /* Menu.swift */,
 				30E74E121F46A42D00C46326 /* EventDetails.swift */,
+				305EDBBE1F5101D800B96079 /* NewEvent.swift */,
+				303A10CA1F63327B00AE3EB3 /* MapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -90,6 +107,7 @@
 		302F22EF1F1EECB000D1339F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				303A10CE1F64445300AE3EB3 /* Annotations */,
 				301C18311F22DA5D005A6B34 /* Event.swift */,
 				301C18331F22FDFD005A6B34 /* MeetupStore.swift */,
 			);
@@ -101,8 +119,19 @@
 			children = (
 				301C182F1F22A11E005A6B34 /* Helper.swift */,
 				302F22F11F1EECFA00D1339F /* MeetupClient.swift */,
+				305EDBBA1F50F17300B96079 /* MeetupToFirebase.swift */,
+				305EDBBC1F50FFF000B96079 /* FirebaseClient.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		303A10CE1F64445300AE3EB3 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				303A10CF1F64446200AE3EB3 /* EventAnno.swift */,
+				303A10D11F64482C00AE3EB3 /* EventPin.swift */,
+			);
+			name = Annotations;
 			sourceTree = "<group>";
 		};
 		30C0BAF51F1EEA05006D4531 = {
@@ -139,6 +168,7 @@
 		58B83B24425AA3A1D5DFC3AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				303A10CC1F63393400AE3EB3 /* MapKit.framework */,
 				637E32EB7A3A8475D25EEB34 /* Pods_MeetupFinder.framework */,
 			);
 			name = Frameworks;
@@ -181,6 +211,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 59ZDL3D4PJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -258,6 +293,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MeetupFinder/Pods-MeetupFinder-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -265,6 +301,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -284,10 +321,16 @@
 				30C0BB041F1EEA05006D4531 /* EventList.swift in Sources */,
 				30E74E131F46A42D00C46326 /* EventDetails.swift in Sources */,
 				301C18341F22FDFD005A6B34 /* MeetupStore.swift in Sources */,
+				305EDBBB1F50F17300B96079 /* MeetupToFirebase.swift in Sources */,
+				303A10CB1F63327B00AE3EB3 /* MapView.swift in Sources */,
 				301C18361F243AD4005A6B34 /* Menu.swift in Sources */,
 				30C0BB021F1EEA05006D4531 /* AppDelegate.swift in Sources */,
 				301C18301F22A11E005A6B34 /* Helper.swift in Sources */,
+				303A10D01F64446200AE3EB3 /* EventAnno.swift in Sources */,
+				305EDBBD1F50FFF000B96079 /* FirebaseClient.swift in Sources */,
 				302F22F21F1EECFA00D1339F /* MeetupClient.swift in Sources */,
+				303A10D21F64482C00AE3EB3 /* EventPin.swift in Sources */,
+				305EDBBF1F5101D800B96079 /* NewEvent.swift in Sources */,
 				301C18321F22DA5D005A6B34 /* Event.swift in Sources */,
 				302F22F41F1EED4600D1339F /* Constants.swift in Sources */,
 			);

@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
+import Firebase
 
 class MeetupClient: NSObject {
     
@@ -16,6 +18,10 @@ class MeetupClient: NSObject {
     
     var allEvents: [Event] = []
     var openEvents: [Event] = []
+    var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    
+    let cachedEventsRef = Database.database().reference(withPath: "cachedEvents")
+    let eventsRef = Database.database().reference(withPath: "events")
     
     func getValueFromUrlParameter(url: String, parameter: String) -> String? {
         let queryItems = URLComponents(string: url)?.queryItems
@@ -33,41 +39,70 @@ class MeetupClient: NSObject {
             let name = json["name"].string,
             let description = json["description"].string,
             let groupName = json["group"]["name"].string,
+            let category = json["group"]["category"]["name"].string,
             let rsvpCount = json["yes_rsvp_count"].int,
             let rsvpLimit = json["rsvp_limit"].int,
             let lat = json["venue"]["lat"].double,
             let lon = json["venue"]["lon"].double,
             let time = json["time"].double,
             let link = json["link"].string {
-            return Event(id: id, name: name, description: description, groupName: groupName,  rsvpCount: rsvpCount, rsvpLimit: rsvpLimit, lat: lat, lon: lon, time: time, link: link)
+            return Event(id: id, name: name, description: description, groupName: groupName, category: category,  rsvpCount: rsvpCount, rsvpLimit: rsvpLimit, lat: lat, lon: lon, time: time, link: link)
         } else {
+            //print("INVALID EVENT FROM JSON")
             return nil
         }
     }
     
-    func getMeetups(lat: String, lon: String, onComplete: @escaping ()->Void) {
-        Alamofire.request(buildUrl(latitude: lat, longitude: lon)).responseJSON { response in
-            //print("Request: \(String(describing: response.request))")   // original url request
-            //print("Response: \(String(describing: response.response))") // http url response
-            //print("Result: \(response.result)")                         // response serialization result
-            
-            if let jsonRaw = response.result.value,
-                let eventJsonArray = JSON(jsonRaw).array {
-                    self.allEvents.removeAll()
-                    self.openEvents.removeAll()
-                
-                    for eventJson in eventJsonArray {
-                        if let event = self.makeEvent(json: eventJson) {
-                            self.allEvents.append(event)
-                            if event.rsvpLimit != event.rsvpCount {
-                                self.openEvents.append(event)
+    func makeEventFromFirebase(_ dict: [String:Any?]) -> Event? {
+        if let id = dict["id"] as? String,
+            let name = dict["name"] as? String,
+            let description = dict["description"] as? String,
+            let groupName = dict["groupName"] as? String,
+            let category = dict["category"] as? String,
+            let rsvpCount = dict["rsvpCount"] as? Int,
+            let rsvpLimit = dict["rsvpLimit"] as? Int,
+            let lat = dict["latitude"] as? Double,
+            let lon = dict["longitude"] as? Double,
+            let time = dict["time"] as? Double,
+            let link = dict["link"] as? String {
+            return Event(id: id, name: name, description: description, groupName: groupName, category: category,  rsvpCount: rsvpCount, rsvpLimit: rsvpLimit, lat: lat, lon: lon, time: time, link: link) }
+        else {
+            //print("INVALID EVENT FROM FIREBASE")
+            return nil
+        }
+    }
+    
+    func getMeetups(lat: String, long: String, onComplete: @escaping ()->Void) {
+        guard let cacheId = self.convertLocationToId(lat, long) else {
+            print("Could not generate cache ID from coordinate.")
+            return
+        }
+        
+        checkForCachedEvents(cacheId) { cacheExists in
+            if cacheExists {
+                self.downloadCachedEvents(cacheId) { onComplete() }
+            } else {
+                Alamofire.request(self.buildUrl(latitude: lat, longitude: long)).responseJSON {
+                    response in
+                    if let jsonRaw = response.result.value,
+                        let eventJsonArray = JSON(jsonRaw).array {
+                        self.allEvents.removeAll()
+                        self.openEvents.removeAll()
+                    
+                        for eventJson in eventJsonArray {
+                            if let event = self.makeEvent(json: eventJson) {
+                                self.saveEventToFirebase(event)
+                                self.allEvents.append(event)
+                                if event.rsvpLimit != event.rsvpCount {
+                                    self.openEvents.append(event)
+                                }
                             }
-                            print(event.name)
                         }
+                        self.cacheEventsToFirebase(cacheId, self.allEvents)
                     }
+                    onComplete()
+                }
             }
-            
-            onComplete()
         }
     }
     
