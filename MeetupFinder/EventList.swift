@@ -24,17 +24,38 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     
     @IBOutlet weak var tableView: UITableView!
 
+    // also refresh button
     @IBAction func openMeetupsPressed(_ sender: Any) {
-        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), long: String(currentLocation.coordinate.longitude)) {
+        MeetupClient.shared.getMeetups(lat: currentLocation.coordinate.latitude, long: currentLocation.coordinate.longitude) {
             self.events = MeetupClient.shared.openEvents
             self.tableView.reloadData()
+            self.getEventPhotos()
         }
     }
     
     @IBAction func allMeetupsPressed(_ sender: Any) {
-        MeetupClient.shared.getMeetups(lat: String(currentLocation.coordinate.latitude), long: String(currentLocation.coordinate.longitude)) {
+        MeetupClient.shared.getMeetups(lat: currentLocation.coordinate.latitude, long: currentLocation.coordinate.longitude) {
             self.events = MeetupClient.shared.allEvents
             self.tableView.reloadData()
+            self.getEventPhotos()
+        }
+    }
+    
+    func getEventPhotos() {
+        for event in MeetupClient.shared.allEvents {
+            guard let groupPhotoUrl = event.groupPhotoUrl else {
+                continue
+            }
+            
+            Helper.downloadImage(url: groupPhotoUrl, completionHandler: { (image) in
+                if let image = image {
+                    let size = CGSize(width: 80.0, height: 80.0)
+                    let resizedImage = image.af_imageAspectScaled(toFill: size)
+                    let roundedImage = resizedImage.af_imageRounded(withCornerRadius: 10.0)
+                    event.groupPhoto = roundedImage
+                    self.tableView.reloadData()
+                }
+            })
         }
     }
     
@@ -45,8 +66,8 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.setLocalizedDateFormatFromTemplate("EEEE h:mm a MMMd")
         
         // For use in foreground
         //self.locationManager.requestWhenInUseAuthorization()
@@ -61,6 +82,8 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tabBarController?.title = "Event List"
+        self.events = MeetupClient.shared.openEvents
+        self.tableView.reloadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -83,15 +106,37 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = events[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let eventLoc = CLLocation(latitude: event.latitude, longitude: event.longitude)
-        let metersFromEvent = currentLocation.distance(from: eventLoc)
-        let milesFromEvent = round(metersFromEvent/1609*10)/10
-        let eventDateRaw = event.time/1000
-        let eventDate = dateFormatter.string(from: Date(timeIntervalSince1970: eventDateRaw))
         
-        cell.textLabel?.text = event.name
-        cell.detailTextLabel?.text = "\(eventDate), \(milesFromEvent) miles away, \(event.rsvpCount)/\(event.rsvpLimit) people going"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell",
+            for: indexPath) as? EventCell else {
+                print("The dequeued cell is not an instance of EventCell.")
+                return UITableViewCell()
+        }
+        
+        if let latitude = event.latitude, let longitude = event.longitude {
+            if latitude == 0 {
+                cell.distanceLabel.text = "Unknown location"
+            } else {
+            let eventLoc = CLLocation(latitude: latitude, longitude: longitude)
+            let metersFromEvent = currentLocation.distance(from: eventLoc)
+            let milesFromEvent = round(metersFromEvent/1609*10)/10
+            cell.distanceLabel.text = "\(milesFromEvent) miles away"
+            }
+        }
+        let eventDateRaw = event.time/1000
+        let eventDateTime = dateFormatter.string(from: Date(timeIntervalSince1970: eventDateRaw))
+        
+        cell.nameLabel.text = event.name
+        if let rsvpCount = event.rsvpCount, let rsvpLimit = event.rsvpLimit {
+            if rsvpLimit == 999 || rsvpCount == 0 {
+                cell.rsvpNumberLabel.text = "No RSVP info"
+            } else {
+                cell.rsvpNumberLabel.text = "\(rsvpCount)/\(rsvpLimit) people going"
+            }
+        }
+        cell.dateTimeLabel.text = eventDateTime
+        cell.groupNameLabel.text = event.groupName
+        cell.imageView?.image = event.groupPhoto
         return cell
     }
     

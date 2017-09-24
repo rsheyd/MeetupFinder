@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import CoreLocation
 
 extension MeetupClient {
     func saveEventToFirebase(_ event: Event) {
@@ -20,20 +21,14 @@ extension MeetupClient {
         for event in events {
             eventIds.append(event.id)
         }
-        cacheIdRef.setValue(["events":eventIds, "date":Date().description])
+        cacheIdRef.setValue(["events":eventIds, "date":Date().timeIntervalSince1970])
     }
     
-    func convertLocationToId(_ lat: String, _ long: String) -> String? {
-        guard let latDouble = Double(lat),
-            let longDouble = Double(long) else {
-                print("Could not create cache ID because location was invalid.")
-                return nil
-        }
-        
-        let stringLat = shortenCoordinateToString(latDouble)
-        let stringLong = shortenCoordinateToString(longDouble)
+    func convertLocationToId(_ lat: Double, _ long: Double) -> String? {
+        let stringLat = shortenCoordinateToString(lat)
+        let stringLong = shortenCoordinateToString(long)
         let id = "\(stringLat)\(stringLong)"
-        print(id)
+        print("Cache ID: \(id)")
         return id
     }
     
@@ -51,11 +46,13 @@ extension MeetupClient {
     func checkForCachedEvents(_ cacheId: String, onComplete: @escaping (_ cacheExists: Bool)->Void) {
         let cacheIdRef = cachedEventsRef.child(cacheId)
         cacheIdRef.observeSingleEvent(of: .value, with: { snapshot in
-            if let value = snapshot.value as? NSDictionary {
-                print("CACHED EVENTS: \(value)")
+            if let value = snapshot.value as? NSDictionary,
+                let cacheDateInt = value["date"] as? Double,
+                Date().timeIntervalSince(Date(timeIntervalSince1970: cacheDateInt)) < 30 {
+                print("Cache found and still recent. Using cache.")
                 onComplete(true)
             } else {
-                print("NO CACHED EVENTS FOUND")
+                print("Cache too old or no cache found. Downloading events from meetup.")
                 onComplete(false)
             }
         }) { error in
@@ -79,11 +76,13 @@ extension MeetupClient {
     
     func loadEventsFromFirebase(_ events: [String], onComplete: @escaping ()->Void) {
         self.allEvents.removeAll()
+        self.openEvents.removeAll()
 
         for eventId in events {
             let eventRef = eventsRef.child(eventId)
             if eventId == events.last {
                 eventRef.observeSingleEvent(of: .value, with: { snapshot in
+                    print("getting last event")
                     if let value = snapshot.value as? [String:Any?],
                         let event = self.makeEventFromFirebase(value) {
                         if event.rsvpLimit != event.rsvpCount {

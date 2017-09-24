@@ -9,24 +9,37 @@
 import Foundation
 import SwiftyJSON
 
-struct Event {
+class Event {
     let id: String
     let name: String
-    let description: String
+    var description: String?
     let groupName: String
+    var groupPhotoUrl: String?
+    var groupPhoto: UIImage?
     let category: String
-    let rsvpCount: Int
-    let rsvpLimit: Int
-    let longitude: Double
-    let latitude: Double
+    var rsvpCount: Int?
+    var rsvpLimit: Int?
+    var longitude: Double?
+    var latitude: Double?
     let time: Double
     let link: String
     
-    init(id: String, name: String, description: String, groupName: String, category: String, rsvpCount: Int, rsvpLimit: Int, lat: Double, lon: Double, time: Double, link: String) {
+    init(id: String, name: String, groupName: String, category: String, time: Double, link: String) {
+        self.id = id
+        self.name = name
+        self.groupName = groupName
+        self.category = category
+        self.time = time
+        self.link = link
+    }
+    
+    init(id: String, name: String, description: String, groupName: String, groupPhotoUrl: String, groupPhoto: UIImage, category: String, rsvpCount: Int, rsvpLimit: Int, lat: Double, lon: Double, time: Double, link: String) {
         self.id = id
         self.name = name
         self.description = description
         self.groupName = groupName
+        self.groupPhotoUrl = groupPhotoUrl
+        self.groupPhoto = groupPhoto
         self.category = category
         self.rsvpCount = rsvpCount
         self.rsvpLimit = rsvpLimit
@@ -41,6 +54,8 @@ struct Event {
         self.name = ""
         self.description = ""
         self.groupName = ""
+        self.groupPhotoUrl = ""
+        self.groupPhoto = UIImage()
         self.category = ""
         self.rsvpCount = 0
         self.rsvpLimit = 0
@@ -54,13 +69,14 @@ struct Event {
         return [
             "id" : id,
             "name" : name,
-            "description" : description,
+            "description" : description ?? "",
             "groupName" : groupName,
+            "groupPhotoUrl" : groupPhotoUrl ?? "",
             "category" : category,
-            "rsvpCount" : rsvpCount,
-            "rsvpLimit" : rsvpLimit,
-            "latitude" : latitude,
-            "longitude" : longitude,
+            "rsvpCount" : rsvpCount ?? 0,
+            "rsvpLimit" : rsvpLimit ?? 999,
+            "latitude" : latitude ?? 0,
+            "longitude" : longitude ?? 0,
             "time" : time,
             "link" : link
         ]

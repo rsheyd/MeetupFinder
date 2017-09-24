@@ -10,5 +10,8 @@ import UIKit
 import Eureka
 
 class NewEvent: FormViewController {
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.title = "Add New Event"
+    }
 }

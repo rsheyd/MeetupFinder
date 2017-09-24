@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "icons8-group.png",
+      "size" : "20x20",
       "scale" : "2x"
     },
     {
@@ -32,9 +31,8 @@
       "scale" : "3x"
     },
     {
+      "idiom" : "iphone",
       "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "icons8-group-3.png",
       "scale" : "2x"
     },
     {

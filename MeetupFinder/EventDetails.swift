@@ -15,7 +15,11 @@ class EventDetails: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let event = event {
-            descriptionTextView.attributedText = Helper.stringFromHtml(string: event.description)
+            if let description = event.description {
+                descriptionTextView.attributedText = Helper.stringFromHtml(html: description)
+            } else {
+                descriptionTextView.attributedText = NSAttributedString(string: "Event details are private.")
+            }
             self.title = event.name
         }
     }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class Helper: UIViewController {
     static func displayAlert(_ message: String?) {
@@ -19,18 +21,27 @@ class Helper: UIViewController {
         }
     }
     
-    static func stringFromHtml(string: String) -> NSAttributedString? {
+    static func stringFromHtml(html: String) -> NSAttributedString? {
         do {
-            let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+            let data = html.data(using: String.Encoding.utf8, allowLossyConversion: true)
             if let d = data {
-                let str = try NSAttributedString(data: d,
-                                                 options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-                                                 documentAttributes: nil)
+                let str =
+                    try NSAttributedString(data: d, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                 return str
             }
         } catch {
         }
         return nil
+    }
+    
+    static func downloadImage(url: String, completionHandler: @escaping (_ image: UIImage?) -> Void) {
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value {
+                completionHandler(image)
+            } else {
+                completionHandler(nil)
+            }
+        }
     }
 }
 
