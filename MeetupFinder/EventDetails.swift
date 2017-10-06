@@ -16,7 +16,7 @@ class EventDetails: UIViewController {
         super.viewDidLoad()
         if let event = event {
             if let description = event.description {
-                descriptionTextView.attributedText = Helper.stringFromHtml(html: description)
+                descriptionTextView.attributedText = description.html2AttributedString
             } else {
                 descriptionTextView.attributedText = NSAttributedString(string: "Event details are private.")
             }

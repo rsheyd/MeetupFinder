@@ -48,7 +48,7 @@ extension MeetupClient {
         cacheIdRef.observeSingleEvent(of: .value, with: { snapshot in
             if let value = snapshot.value as? NSDictionary,
                 let cacheDateInt = value["date"] as? Double,
-                Date().timeIntervalSince(Date(timeIntervalSince1970: cacheDateInt)) < 30 {
+                Date().timeIntervalSince(Date(timeIntervalSince1970: cacheDateInt)) < 3600 { //seconds, 1 hour
                 print("Cache found and still recent. Using cache.")
                 onComplete(true)
             } else {

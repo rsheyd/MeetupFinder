@@ -21,15 +21,20 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     var events: [Event] = []
     
     var eventsRef: DatabaseReference!
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
 
-    // also refresh button
+    func refresh(sender:AnyObject) {
+        openMeetupsPressed(sender)
+    }
+    
     @IBAction func openMeetupsPressed(_ sender: Any) {
         MeetupClient.shared.getMeetups(lat: currentLocation.coordinate.latitude, long: currentLocation.coordinate.longitude) {
             self.events = MeetupClient.shared.openEvents
             self.tableView.reloadData()
             self.getEventPhotos()
+            self.refreshControl.endRefreshing()
         }
     }
     
@@ -43,19 +48,24 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     
     func getEventPhotos() {
         for event in MeetupClient.shared.allEvents {
-            guard let groupPhotoUrl = event.groupPhotoUrl else {
-                continue
+            if let groupPhotoUrl = event.groupPhotoUrl {
+                Helper.downloadImage(url: groupPhotoUrl, completionHandler: { (image) in
+                    if let image = image {
+                        let size = CGSize(width: 80.0, height: 80.0)
+                        let resizedImage = image.af_imageAspectScaled(toFill: size)
+                        let roundedImage = resizedImage.af_imageRounded(withCornerRadius: 10.0)
+                        event.groupPhoto = roundedImage
+                        self.tableView.reloadData()
+                    }
+                })
+            } else {
+                let catImage = Helper.getEventCategoryImage(event)
+                let size = CGSize(width: 80.0, height: 80.0)
+                let resizedImage = catImage?.af_imageAspectScaled(toFill: size)
+                let roundedImage = resizedImage?.af_imageRounded(withCornerRadius: 10.0)
+                event.groupPhoto = roundedImage
+                self.tableView.reloadData()
             }
-            
-            Helper.downloadImage(url: groupPhotoUrl, completionHandler: { (image) in
-                if let image = image {
-                    let size = CGSize(width: 80.0, height: 80.0)
-                    let resizedImage = image.af_imageAspectScaled(toFill: size)
-                    let roundedImage = resizedImage.af_imageRounded(withCornerRadius: 10.0)
-                    event.groupPhoto = roundedImage
-                    self.tableView.reloadData()
-                }
-            })
         }
     }
     
@@ -77,6 +87,11 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,6 +152,7 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
         cell.dateTimeLabel.text = eventDateTime
         cell.groupNameLabel.text = event.groupName
         cell.imageView?.image = event.groupPhoto
+        cell.separatorInset = UIEdgeInsets.zero // full lines between cells
         return cell
     }
     

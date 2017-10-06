@@ -21,19 +21,6 @@ class Helper: UIViewController {
         }
     }
     
-    static func stringFromHtml(html: String) -> NSAttributedString? {
-        do {
-            let data = html.data(using: String.Encoding.utf8, allowLossyConversion: true)
-            if let d = data {
-                let str =
-                    try NSAttributedString(data: d, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-                return str
-            }
-        } catch {
-        }
-        return nil
-    }
-    
     static func downloadImage(url: String, completionHandler: @escaping (_ image: UIImage?) -> Void) {
         Alamofire.request(url).responseImage { response in
             if let image = response.result.value {
@@ -42,6 +29,83 @@ class Helper: UIViewController {
                 completionHandler(nil)
             }
         }
+    }
+    
+    static func getEventCategoryImage(_ event: Event) -> UIImage? {
+        var imageName = ""
+        
+        switch event.category {
+        case "Arts & Culture":
+            imageName = "arts50"
+        case "Book Clubs":
+            imageName = "books50"
+        case "Career & Business":
+            imageName = "business50"
+        case "Cars & Motorcycles":
+            imageName = "cars50"
+        case "Community & Environment":
+            imageName = "community50"
+        case "Dancing":
+            imageName = "dance50"
+        case "Education & Learning":
+            imageName = "education50"
+        case "Fashion & Beauty":
+            imageName = "fashion50"
+        case "Fitness":
+            imageName = "fitness50"
+        case "Food & Drink":
+            imageName = "food50"
+        case "Games":
+            imageName = "games50"
+        case "Health & Wellbeing":
+            imageName = "health50"
+        case "Hobbies & Crafts":
+            imageName = "hobbies50"
+        case "Language & Ethnic Identity":
+            imageName = "languages50"
+        case "LGBT":
+            imageName = "lgbt50"
+        case "Lifestyle":
+            imageName = "lifestyle50"
+        case "Movements & Politics":
+            imageName = "politics50"
+        case "Movies & Film":
+            imageName = "movies50"
+        case "Music":
+            imageName = "music50"
+        case "New Age & Spirituality":
+            imageName = "spirituality50"
+        case "Outdoors & Adventure":
+            imageName = "outdoors50"
+        case "Paranormal":
+            imageName = "paranormal50"
+        case "Parents & Family":
+            imageName = "family50"
+        case "Pets & Animals":
+            imageName = "pets50"
+        case "Photography":
+            imageName = "photography50"
+        case "Religion & Beliefs":
+            imageName = "religion50"
+        case "Sci-Fi & Fantasy":
+            imageName = "scifi50"
+        case "Singles":
+            imageName = "singles50"
+        case "Socializing":
+            imageName = "socializing50"
+        case "Sports & Recreation":
+            imageName = "sports50"
+        case "Support":
+            imageName = "support50"
+        case "Tech":
+            imageName = "tech50"
+        case "Writing":
+            imageName = "writing50"
+        default:
+            imageName = "icons8-group"
+        }
+        
+        return UIImage(named: imageName)
     }
 }
 
@@ -74,5 +138,17 @@ extension String {
             randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
         return randomString
+    }
+    
+    var html2AttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: Data(utf8), options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            print("error:", error)
+            return nil
+        }
+    }
+    var html2String: String {
+        return html2AttributedString?.string ?? ""
     }
 }
