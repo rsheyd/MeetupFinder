@@ -24,7 +24,7 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     func refresh(sender:AnyObject) {
         openMeetupsPressed(sender)
     }

@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '9.0'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -9,4 +9,5 @@ target 'MeetupFinder' do
     pod 'Eureka'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
+    pod 'OAuthSwift', '~> 1.1.2'
 end

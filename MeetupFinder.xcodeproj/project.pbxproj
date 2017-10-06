@@ -12,6 +12,7 @@
 		301C18321F22DA5D005A6B34 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301C18311F22DA5D005A6B34 /* Event.swift */; };
 		301C18341F22FDFD005A6B34 /* MeetupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301C18331F22FDFD005A6B34 /* MeetupStore.swift */; };
 		301C18361F243AD4005A6B34 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301C18351F243AD4005A6B34 /* Menu.swift */; };
+		30296FD91F87FC1B006E0F92 /* EventDescriptionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30296FD81F87FC1B006E0F92 /* EventDescriptionDetails.swift */; };
 		302F22F21F1EECFA00D1339F /* MeetupClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F22F11F1EECFA00D1339F /* MeetupClient.swift */; };
 		302F22F41F1EED4600D1339F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F22F31F1EED4600D1339F /* Constants.swift */; };
 		303A10CB1F63327B00AE3EB3 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A10CA1F63327B00AE3EB3 /* MapView.swift */; };
@@ -35,6 +36,7 @@
 		301C18311F22DA5D005A6B34 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		301C18331F22FDFD005A6B34 /* MeetupStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupStore.swift; sourceTree = "<group>"; };
 		301C18351F243AD4005A6B34 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		30296FD81F87FC1B006E0F92 /* EventDescriptionDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionDetails.swift; sourceTree = "<group>"; };
 		302F22F11F1EECFA00D1339F /* MeetupClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetupClient.swift; sourceTree = "<group>"; };
 		302F22F31F1EED4600D1339F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		303A10CA1F63327B00AE3EB3 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				30E74E121F46A42D00C46326 /* EventDetails.swift */,
 				305EDBBE1F5101D800B96079 /* NewEvent.swift */,
 				303A10CA1F63327B00AE3EB3 /* MapView.swift */,
+				30296FD81F87FC1B006E0F92 /* EventDescriptionDetails.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -297,6 +301,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -316,6 +321,7 @@
 				30E74E131F46A42D00C46326 /* EventDetails.swift in Sources */,
 				301C18341F22FDFD005A6B34 /* MeetupStore.swift in Sources */,
 				305EDBBB1F50F17300B96079 /* MeetupToFirebase.swift in Sources */,
+				30296FD91F87FC1B006E0F92 /* EventDescriptionDetails.swift in Sources */,
 				303A10CB1F63327B00AE3EB3 /* MapView.swift in Sources */,
 				301C18361F243AD4005A6B34 /* Menu.swift in Sources */,
 				30C0BB021F1EEA05006D4531 /* AppDelegate.swift in Sources */,
@@ -452,7 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 59ZDL3D4PJ;
 				INFOPLIST_FILE = MeetupFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.rlabs.MeetupFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -467,7 +473,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 59ZDL3D4PJ;
 				INFOPLIST_FILE = MeetupFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.rlabs.MeetupFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";

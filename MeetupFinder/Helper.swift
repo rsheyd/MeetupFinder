@@ -21,6 +21,14 @@ class Helper: UIViewController {
         }
     }
     
+    static func displayUnwrappedAlert(_ message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            UIApplication.topViewController()?.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     static func downloadImage(url: String, completionHandler: @escaping (_ image: UIImage?) -> Void) {
         Alamofire.request(url).responseImage { response in
             if let image = response.result.value {

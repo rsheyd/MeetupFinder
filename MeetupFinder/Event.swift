@@ -69,9 +69,9 @@ class Event {
         return [
             "id" : id,
             "name" : name,
-            "description" : description ?? "",
+            "description" : description ?? "" ,
             "groupName" : groupName,
-            "groupPhotoUrl" : groupPhotoUrl ?? "",
+            "groupPhotoUrl" : groupPhotoUrl ?? "" ,
             "category" : category,
             "rsvpCount" : rsvpCount ?? 0,
             "rsvpLimit" : rsvpLimit ?? 999,
