@@ -210,10 +210,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="htg-eH-EST">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="htg-eH-EST">
                                 <rect key="frame" x="16" y="216" width="343" height="164"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="105" id="pwk-yl-4kI"/>
+                                    <constraint firstAttribute="height" constant="164" id="pwk-yl-4kI"/>
                                     <constraint firstAttribute="width" constant="343" id="sdJ-T1-DzD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="16"/>
@@ -302,6 +302,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="vXc-jT-nZo" id="aUi-EY-AjL"/>
+                        <outlet property="distanceLabel" destination="JjJ-zR-D4T" id="rE0-wu-WJb"/>
+                        <outlet property="eventNameLabel" destination="cGO-hh-7ed" id="xIH-b9-zey"/>
+                        <outlet property="eventPhotoView" destination="XAd-2B-8Ta" id="zeF-8B-D1X"/>
+                        <outlet property="groupNameLabel" destination="VxO-tS-YEk" id="31K-cm-Jpl"/>
+                        <outlet property="rsvpNumberLabel" destination="txS-w6-dZW" id="jsu-1b-dEs"/>
                         <outlet property="shortDescriptionButton" destination="htg-eH-EST" id="amo-K3-0qp"/>
                         <outlet property="shortDescriptionLabel" destination="XbM-Ib-dEc" id="gDt-oX-6TZ"/>
                     </connections>

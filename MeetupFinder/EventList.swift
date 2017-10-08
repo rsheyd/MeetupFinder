@@ -96,7 +96,7 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tabBarController?.title = "Event List"
+        tabBarController?.title = "Events Near You"
         self.events = MeetupClient.shared.openEvents
         self.tableView.reloadData()
     }
@@ -129,25 +129,19 @@ class EventList: UIViewController, CLLocationManagerDelegate, UITableViewDelegat
         }
         
         if let latitude = event.latitude, let longitude = event.longitude {
-            if latitude == 0 {
-                cell.distanceLabel.text = "Unknown location"
-            } else {
             let eventLoc = CLLocation(latitude: latitude, longitude: longitude)
             let metersFromEvent = currentLocation.distance(from: eventLoc)
             let milesFromEvent = round(metersFromEvent/1609*10)/10
             cell.distanceLabel.text = "\(milesFromEvent) miles away"
-            }
+            event.distanceFromMe = milesFromEvent
         }
         let eventDateRaw = event.time/1000
         let eventDateTime = dateFormatter.string(from: Date(timeIntervalSince1970: eventDateRaw))
+        event.myDateTime = eventDateTime
         
         cell.nameLabel.text = event.name
         if let rsvpCount = event.rsvpCount, let rsvpLimit = event.rsvpLimit {
-            if rsvpLimit == 999 || rsvpCount == 0 {
-                cell.rsvpNumberLabel.text = "No RSVP info"
-            } else {
-                cell.rsvpNumberLabel.text = "\(rsvpCount)/\(rsvpLimit) people going"
-            }
+            cell.rsvpNumberLabel.text = "\(rsvpCount)/\(rsvpLimit) people going"
         }
         cell.dateTimeLabel.text = eventDateTime
         cell.groupNameLabel.text = event.groupName

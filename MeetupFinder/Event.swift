@@ -23,6 +23,8 @@ class Event {
     var latitude: Double?
     let time: Double
     let link: String
+    var distanceFromMe: Double?
+    var myDateTime: String?
     
     init(id: String, name: String, groupName: String, category: String, time: Double, link: String) {
         self.id = id
@@ -74,7 +76,7 @@ class Event {
             "groupPhotoUrl" : groupPhotoUrl ?? "" ,
             "category" : category,
             "rsvpCount" : rsvpCount ?? 0,
-            "rsvpLimit" : rsvpLimit ?? 999,
+            "rsvpLimit" : rsvpLimit ?? 0,
             "latitude" : latitude ?? 0,
             "longitude" : longitude ?? 0,
             "time" : time,

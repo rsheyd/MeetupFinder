@@ -126,7 +126,7 @@ class MeetupClient: NSObject {
                             if let event = self.makeEvent(json: eventJson) {
                                 self.saveEventToFirebase(event)
                                 self.allEvents.append(event)
-                                if event.rsvpLimit != event.rsvpCount {
+                                if event.rsvpLimit != event.rsvpCount, event.latitude != 0 {
                                     self.openEvents.append(event)
                                 }
                             } else {
