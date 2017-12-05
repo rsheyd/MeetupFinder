@@ -67,7 +67,7 @@ class Event {
         self.link = ""
     }
     
-    func toAnyObject() -> Any {
+    func toAnyObject() -> [String:Any] {
         return [
             "id" : id,
             "name" : name,

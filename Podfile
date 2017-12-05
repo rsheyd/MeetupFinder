@@ -9,5 +9,5 @@ target 'MeetupFinder' do
     pod 'Eureka'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
-    pod 'OAuthSwift', '~> 1.1.2'
+    pod 'OAuthSwift'
 end

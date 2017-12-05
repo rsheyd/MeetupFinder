@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>MeetupFinder needs this to show you meetups near you.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>MeetupFinder needs this to show you meetups near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>MeetupFinder uses this for map view.</string>
 	<key>UILaunchStoryboardName</key>

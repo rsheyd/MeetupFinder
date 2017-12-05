@@ -142,7 +142,7 @@ extension String {
         var randomString: String = ""
         
         for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.characters.count))
+            let randomValue = arc4random_uniform(UInt32(base.count))
             randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
         return randomString
@@ -150,7 +150,7 @@ extension String {
     
     var html2AttributedString: NSAttributedString? {
         do {
-            return try NSAttributedString(data: Data(utf8), options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return try NSAttributedString(data: Data(utf8), options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
         } catch {
             print("error:", error)
             return nil
